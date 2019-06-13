@@ -1,0 +1,20 @@
+The Install script needs to be run as root.
+
+Install runs the scripts stage*.bash in the order that the script
+filenames sort.  So that why the stage scripts have names that have
+numbers in them.  So
+
+   stage03.user.bash will run as the user that owns
+   ../README.md before running stage05.root.bash as
+   user root.
+
+You can add more stages to this install script by adding files with
+filenames like stage*.user.bash or stage*.root.bash.
+
+File like *.done and *.FAILED are generated files that let you have
+a little feedback and control as to what ran and what will run
+respectively.
+
+All the stage* scripts are run with variables from the configuration
+file config.bash and are run with the current working directory being
+this directory.

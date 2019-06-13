@@ -1,0 +1,84 @@
+#!/bin/bash
+
+set -e
+
+# Go to the directory where this script is:
+cd $(dirname "$(readlink -f "$0")")
+
+# The user building the software is the owner of the
+# file ../README.md.
+USER="$(stat --printf='%U' ../README.md)"
+
+if [ ! -f config.bash ] ; then
+    cp default_config.bash config.bash
+    echo "config.bash was not found."
+    echo
+    echo "Copied default_config.bash to config.bash"
+fi
+
+if [ "$(id -u)" != 0 ] ; then
+    echo "You must be root (id = 0) to run this"
+    exit 1
+fi
+
+source config.bash
+
+stages="$(ls -1 stage*.root.bash stage*.user.bash | sort)"
+
+
+# Usage: fail_stage STAGE_FILE
+#
+function fail_stage() {
+    date > $1.FAILED
+    chown $USER $1.FAILED
+    set +x
+    echo "$1 FAILED"
+    exit 1
+}
+
+function mark_strage_done() {
+
+    date > $1.done
+    chown $USER $1.done
+}
+
+
+set +e
+set +x
+
+mark='\n---------------------------------------------------------------\n'
+
+env="\
+DEFAULT_HTTPS_PORT=$DEFAULT_HTTPS_PORT\
+ PREPREFIX=$PREPREFIX"
+
+for i in $env ; do
+    export $i
+done
+
+for stage in $stages ; do
+    if [ ! -f $stage.done ] ; then
+        echo -e "${mark}Running: $stage${mark}"
+        if [[ "$stage" == stage*.root.bash ]]; then
+            # Running stage as root
+            if bash $stage ; then
+                mark_strage_done $stage
+            else
+                fail_stage $stage
+            fi
+        else
+            # Running stage as regular user
+            if sudo -u $USER $env bash $stage ; then
+                mark_strage_done $stage
+            else
+                fail_stage $stage
+            fi
+        fi
+    else
+        echo "$stage is marked as done"
+    fi
+done
+
+
+echo "USER=$USER"
+
