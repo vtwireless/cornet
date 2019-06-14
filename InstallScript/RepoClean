@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -ex
+
+# Go to the directory where this script is:
+cd $(dirname "$(readlink -f "$0")")
+
+
+# load default config
+#source default_config.bash
+# now override with users config
+#[ -f config.bash ] && source default_config.bash
+
+
+rm -f *.done *.FAILED config.bash crts-*.tar.gz
+rm -rf ../crts-*

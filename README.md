@@ -2,7 +2,7 @@
 
 ## For the impatient
 
-Just run "sudo ./Install/Install"
+Just run "sudo ./InstallScript/Install"
 
 and then run ...
 
@@ -19,11 +19,18 @@ project could be harvested and used by others.  Files that become generic
 will likely be moved to the CRTS (Cognitive Radio Test System) software
 project, https://github.com/vtwireless/crts .
 
+
 ## Installing
 
-Configure by copying Install/default_config.bash to Install/config.bash
-and than edit Install/config.bash .  Or you can skip that step and you
-will use the default configuration from Install/default_config.bash.
+Configure by copying InstallScript/default_config.bash to
+InstallScript/config.bash and than edit InstallScript/config.bash .  Or
+you can skip that step and you will use the default configuration from
+InstallScript/default_config.bash.
 
-Then run "sudo ./Install/Install".
+Then run "sudo ./InstallScript/Install".
+
+
+## Ports
+
+Currently using operating system Ubuntu 18.04.2 LTS
 

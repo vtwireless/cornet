@@ -1,8 +1,0 @@
-#!/bin/bash
-
-set -ex
-
-# Go to the directory where this script is:
-cd $(dirname "$(readlink -f "$0")")
-
-rm -f *.done *.FAILED config.bash

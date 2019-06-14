@@ -10,9 +10,9 @@ cd $(dirname "$(readlink -f "$0")")
 USER="$(stat --printf='%U' ../README.md)"
 
 if [ ! -f config.bash ] ; then
-    cp default_config.bash config.bash
     echo "config.bash was not found."
     echo
+    cp default_config.bash config.bash
     echo "Copied default_config.bash to config.bash"
 fi
 
@@ -36,10 +36,14 @@ function fail_stage() {
     exit 1
 }
 
-function mark_strage_done() {
+# Usage: mark_stage_done STAGE USER
+#
+function mark_stage_done() {
 
+    [ -n "$2" ] || exit 1 # script error
     date > $1.done
-    chown $USER $1.done
+    [ "$2" != "$USER" ] && chown $USER $1.done
+    echo -e "\nRunning $1 as $2 SUCCEEDED\n"
 }
 
 
@@ -48,37 +52,30 @@ set +x
 
 mark='\n---------------------------------------------------------------\n'
 
-env="\
-DEFAULT_HTTPS_PORT=$DEFAULT_HTTPS_PORT\
- PREPREFIX=$PREPREFIX"
-
-for i in $env ; do
-    export $i
-done
+export BASH_ENV=config.bash
 
 for stage in $stages ; do
     if [ ! -f $stage.done ] ; then
-        echo -e "${mark}Running: $stage${mark}"
+        echo -en "${mark}Running: $stage"
         if [[ "$stage" == stage*.root.bash ]]; then
             # Running stage as root
+            echo -e " as root${mark}"
             if bash $stage ; then
-                mark_strage_done $stage
+                mark_stage_done $stage root
             else
                 fail_stage $stage
             fi
         else
             # Running stage as regular user
-            if sudo -u $USER $env bash $stage ; then
-                mark_strage_done $stage
+            echo -e " as user $USER${mark}"
+            if sudo -u $USER --preserve-env=BASH_ENV bash $stage ; then
+                mark_stage_done $stage $USER
             else
                 fail_stage $stage
             fi
         fi
     else
-        echo "$stage is marked as done"
+        echo -e "\n--- stage $stage is marked as done, skipping it this time\n"
     fi
 done
-
-
-echo "USER=$USER"
 
