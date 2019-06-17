@@ -70,6 +70,8 @@ done
 
 echo -e "\n\nBye\n"
 
+sleep 1
+
 reboot
 
 # We'll get wacked by the reboot
