@@ -20,7 +20,8 @@ tar --directory=$CRTS_BUILDDIR\
  -xzf crts-$CRTS_TAG.tar.gz
 
 
-sed -e "s!@root@!${PREPREFIX}/encap!g" prefixes.in > $CRTS_BUILDDIR/dependencies/prefixes
+sed -e "s!root\=/usr/local!root\=${PREPREFIX}/encap!g"\
+ $CRTS_BUILDDIR/dependencies/default_prefixes > $CRTS_BUILDDIR/dependencies/prefixes
 
 
 cd $CRTS_BUILDDIR
