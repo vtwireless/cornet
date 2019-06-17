@@ -6,8 +6,8 @@ set -e
 cd $(dirname "$(readlink -f "$0")")
 
 # The user building the software is the owner of the
-# file ../README.md.
-USER="$(stat --printf='%U' ../README.md)"
+# file cornet_webServer.in
+USER="$(stat --printf='%U' cornet_webServer.in)"
 
 if [ ! -f config.bash ] ; then
     echo "config.bash was not found."

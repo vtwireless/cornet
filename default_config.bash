@@ -55,7 +55,7 @@ export PREPREFIX=/usr/local
 
 # where to put the top CRTS source directory
 #
-export CRTS_BUILDDIR=../crts-$CRTS_TAG
+export CRTS_BUILDDIR=crts-$CRTS_TAG
 
 # Where CRTS is installed
 #
@@ -64,4 +64,3 @@ export CRTS_PREFIX=$PREPREFIX/encap/crts-$CRTS_TAG
 # Where Stuff in this package is installed
 #
 export CORNET_PREFIX=$PREPREFIX/encap/cornet
-
