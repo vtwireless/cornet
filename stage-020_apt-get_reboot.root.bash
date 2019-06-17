@@ -61,7 +61,7 @@ again.  Rebooting in $seconds seconds.
 EOF
 
 
-
+set +ex
 while [ "$seconds" != "0" ] ; do
     sleep 1
     echo -n " $seconds"
@@ -71,6 +71,8 @@ done
 echo -e "\n\nBye\n"
 
 sleep 1
+
+set -e
 
 reboot
 
