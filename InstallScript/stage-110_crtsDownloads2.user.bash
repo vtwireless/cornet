@@ -1,4 +1,4 @@
-#
+# Configure and download more stuff for building crts
 
 set -ex
 

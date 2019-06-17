@@ -1,4 +1,4 @@
-#
+# Build and install crts
 
 set -ex
 

@@ -1,4 +1,4 @@
-#
+# build and install GNUradio
 
 set -ex
 

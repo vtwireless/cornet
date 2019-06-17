@@ -1,4 +1,5 @@
-#
+# Download crts and get ready to build crts dependencies
+# nodeJS, uhd, and GNUradio
 
 set -ex
 

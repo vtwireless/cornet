@@ -1,4 +1,4 @@
-#
+# build and install node JS
 
 set -ex
 
