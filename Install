@@ -9,6 +9,11 @@ cd $(dirname "$(readlink -f "$0")")
 # file cornet_webServer.in
 USER="$(stat --printf='%U' cornet_webServer.in)"
 
+if [ "$(id -u)" != 0 ] ; then
+    echo "You must be root (id = 0) to run this"
+    exit 1
+fi
+
 if [ ! -f config.bash ] ; then
     echo "config.bash was not found."
     echo
@@ -16,10 +21,6 @@ if [ ! -f config.bash ] ; then
     echo "Copied default_config.bash to config.bash"
 fi
 
-if [ "$(id -u)" != 0 ] ; then
-    echo "You must be root (id = 0) to run this"
-    exit 1
-fi
 
 source config.bash
 
