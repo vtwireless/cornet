@@ -26,10 +26,17 @@ apt-get install -y\
  locate\
  cmake
 
+
+# Mark this script as done so it does not run the next time we run
+# "sudo ./Install" .
+#
+
 date > ${0}.done
 chown $USER ${0}.done
 
 set +x
+
+seconds=10
 
 cat << EOF
 
@@ -48,24 +55,23 @@ After this computer reboots, you'll need to login again and run:
    
 
 
-again.  Rebooting in 10 seconds.
+again.  Rebooting in $seconds seconds.
 
 
 EOF
 
 
-# Mark this script as done so it does not run the next time we run
-# ./Install .
-#
 
-count=10
-while [ "$count" != "0" ] ; do
+while [ "$seconds" != "0" ] ; do
     sleep 1
-    echo -n " $count"
-    let count=$count-1
+    echo -n " $seconds"
+    let seconds=$seconds-1
 done
 
 echo -e "\n\nBye\n"
 
-
 reboot
+
+# We'll get wacked by the reboot
+sleep 10
+
