@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+exec $CRTS_PREFIX/bin/crts_contestWebServer\
+ --https_hostname=@DEFAULT_SERVER_ADDRESS@\
+ --https_port=@DEFAULT_HTTPS_PORT@

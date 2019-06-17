@@ -3,10 +3,17 @@
 # Copy this file to config.bash and then edit config.bash,
 # then run ./Install
 
-# If you wish to add a configuration variable that is accessible in
-# all stage scripts, just add it here, and that's it.  Add it here
-# with "export" and use it in your stage script.
+# If you wish to add a configuration variable that is accessible in all
+# stage scripts, just add it here, and that's it.  Add it here with
+# "export" and use it in your stage script.  stage*.bash scripts run in
+# the numbered order.  The number of the stage script is determines the
+# order in which it runs.
 
+# To change the versions of node JS, UHD, and GNUradio make changes to the
+# CRTS code at https://github.com/vtwireless/crts .  Ya, since CRTS is
+# very dependent on UHD and GNUradio, and UHD and GNUradio are changing
+# often, we keep that information in CRTS,
+# https://github.com/vtwireless/crts
 
 
 ##########################################################################
@@ -35,16 +42,6 @@ export DEFAULT_SERVER_ADDRESS=192.168.40.141
 export CRTS_TAG=master
 
 
-# DEFAULT_SERVER_ADDRESS is the address or domain name that refers to this
-# server from computers (nodes) that access the stream programs that
-# access the USRPs. This address will be used to let the CRTS spectrum
-# feed program and the CRTS Controllers connect to this server.
-#
-export DEFAULT_SERVER_ADDRESS=192.168.40.141
-
-
-
-
 
 
 ##########################################################################
@@ -63,4 +60,8 @@ export CRTS_BUILDDIR=../crts-$CRTS_TAG
 # Where CRTS is installed
 #
 export CRTS_PREFIX=$PREPREFIX/encap/crts-$CRTS_TAG
+
+# Where Stuff in this package is installed
+#
+export CORNET_PREFIX=$PREPREFIX/encap/cornet
 
