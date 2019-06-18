@@ -2,9 +2,9 @@
 
 ## For the impatient
 
-Just run "sudo ./Install"
+Just run ```sudo ./Install```
 
-and then run a web server by running "cornet_webServer"
+and then run a web server by running ```cornet_webServer```
 
 
 ## Description
@@ -26,7 +26,9 @@ Configure by copying default_config.bash to config.bash and than edit
 config.bash .  Or you can skip that step and you will use the default
 configuration from default_config.bash.
 
-Then run "sudo ./Install".
+Then run ```sudo ./Install```.
+
+If you want a log file try running ```sudo ./Install 2>&1 | tee log.txt```
 
 
 ## Ports
