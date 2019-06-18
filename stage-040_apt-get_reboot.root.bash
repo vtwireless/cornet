@@ -32,7 +32,7 @@ apt-get install -y\
 #
 
 date > ${0}.done
-chown $USER ${0}.done
+chown $INST_USER ${0}.done
 
 set +x
 

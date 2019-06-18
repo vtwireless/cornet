@@ -64,3 +64,9 @@ export CRTS_PREFIX=$PREPREFIX/encap/crts-$CRTS_TAG
 # Where Stuff in this package is installed
 #
 export CORNET_PREFIX=$PREPREFIX/encap/cornet
+
+# The installer user that is own of this source directory and who
+# is the owner of the encap directory $PREPREFIX/encap/
+#
+export INST_USER="$(stat --printf='%U' README.md)"
+

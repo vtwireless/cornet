@@ -5,9 +5,6 @@ set -e
 # Go to the directory where this script is:
 cd $(dirname "$(readlink -f "$0")")
 
-# The user building the software is the owner of the
-# file cornet_webServer.in
-USER="$(stat --printf='%U' cornet_webServer.in)"
 
 if [ "$(id -u)" != 0 ] ; then
     echo "You must be root (id = 0) to run this"
@@ -22,7 +19,9 @@ if [ ! -f config.bash ] ; then
 fi
 
 
+# Get the configuration 
 source config.bash
+
 
 stages="$(ls -1 stage*.root.bash stage*.user.bash | sort)"
 
@@ -31,7 +30,7 @@ stages="$(ls -1 stage*.root.bash stage*.user.bash | sort)"
 #
 function fail_stage() {
     date > $1.FAILED
-    chown $USER $1.FAILED
+    chown $INST_USER $1.FAILED
     set +x
     echo "$1 FAILED"
     exit 1
@@ -43,7 +42,7 @@ function mark_stage_done() {
 
     [ -n "$2" ] || exit 1 # script error
     date > $1.done
-    [ "$2" != "$USER" ] && chown $USER $1.done
+    [ "$2" != "$INST_USER" ] && chown $INST_USER $1.done
     echo -e "\nRunning $1 as $2 SUCCEEDED\n"
 }
 
@@ -68,9 +67,9 @@ for stage in $stages ; do
             fi
         else
             # Running stage as regular user
-            echo -e " as user $USER${mark}"
-            if sudo -u $USER --preserve-env=BASH_ENV bash $stage ; then
-                mark_stage_done $stage $USER
+            echo -e " as user $INST_USER${mark}"
+            if sudo -u $INST_USER --preserve-env bash $stage ; then
+                mark_stage_done $stage $INST_USER
             else
                 fail_stage $stage
             fi
