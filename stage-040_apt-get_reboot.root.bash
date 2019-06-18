@@ -51,11 +51,16 @@ After this computer reboots, you'll need to login again and run:
 
 
 
-      cd $PWD && ./Install
-   
+      cd $PWD && sudo ./Install
 
 
-again.  Rebooting in $seconds seconds.
+or something like that.   
+
+
+Rebooting in $seconds seconds.
+
+Ctrl-C to stop it.
+
 
 
 EOF
