@@ -65,7 +65,7 @@ export CRTS_TAG=master
 # Clearly this will fail unless ifconfig is installed.
 #
 export DEFAULT_SERVER_ADDRESS=$(
-/sbin/ifconfig eth1 | grep -e  'inet[^6]' | awk '{print $2}')
+/sbin/ifconfig eth0 | grep -e  'inet[^6]' | awk '{print $2}')
 
 
 
