@@ -23,7 +23,7 @@
 # The default HTTPS port used for the CRTS web server when it is run using
 # the wrapper script "run_web_server" in this package.
 #
-# This you will likely need to change.
+# This you will likely need to change if you will run the web server.
 #
 export DEFAULT_HTTPS_PORT=9090
 
