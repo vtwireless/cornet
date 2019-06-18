@@ -24,7 +24,8 @@ apt-get install -y\
  libtool\
  automake\
  locate\
- cmake
+ cmake\
+ curl
 
 
 # Mark this script as done so it does not run the next time we run

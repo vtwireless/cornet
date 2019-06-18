@@ -15,6 +15,7 @@ if [ ! -f config.bash ] ; then
     echo "config.bash was not found."
     echo
     cp default_config.bash config.bash
+    chown $INST_USER:$INST_USER config.bash
     echo "Copied default_config.bash to config.bash"
 fi
 
@@ -30,7 +31,7 @@ stages="$(ls -1 stage*.root.bash stage*.user.bash | sort)"
 #
 function fail_stage() {
     date > $1.FAILED
-    chown $INST_USER $1.FAILED
+    chown $INST_USER:$INST_USER $1.FAILED
     set +x
     echo "$1 FAILED"
     exit 1
@@ -42,7 +43,7 @@ function mark_stage_done() {
 
     [ -n "$2" ] || exit 1 # script error
     date > $1.done
-    [ "$2" != "$INST_USER" ] && chown $INST_USER $1.done
+    chown $INST_USER:$INST_USER $1.done
     echo -e "\nRunning $1 as $2 SUCCEEDED\n"
 }
 
