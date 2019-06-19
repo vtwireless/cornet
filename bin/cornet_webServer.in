@@ -9,6 +9,36 @@ set -e
 # Go to the directory where this script is:
 cd $(dirname "$(readlink -f "$0")")
 
+
+# DEFAULT_SERVER_ADDRESS is the address or domain name that refers to this
+# server from computers (nodes) that access the stream programs that
+# access the USRPs. This address will be used to let the CRTS spectrum
+# feed program and the CRTS Controllers connect to this server.  You want
+# this to be the IP4 address of the computer that you are running the web
+# server on.   For example DEFAULT_SERVER_ADDRESS=192.168.40.141
+#
+# This is not necessarily an address that is accessible from the Internet.
+#
+# Since we get the address from a program there may be no need to change
+# this.
+#
+# Clearly this will fail unless ifconfig is installed.
+#
+DEFAULT_SERVER_ADDRESS=$(
+/sbin/ifconfig eth0 | grep -e  'inet[^6]' | awk '{print $2}')
+
+# The default HTTPS Address, like foo in https://foo.com, so we know how
+# to connect to the web server from the Internet using a web broswer.
+#
+# This is not the same as DEFAULT_SERVER_ADDRESS which is not necessarily
+# accessible from the Internet.
+#
+DEFAULT_HTTPS_HOSTNAME=kermit.wireless.vt.edu
+
+
+# How to find crts_contestWebServer?
+# Ans: We'll try the environment PATH that is now set.
+
 exec crts_contestWebServer\
  --user=admin --password=adminK2\
  --user=betty --password=bettyK1\
@@ -17,7 +47,7 @@ exec crts_contestWebServer\
  --launcher_dir ../etc/cornet/webLauncher_programs\
  --upload_dir=$HOME/CRTS_UPLOAD\
  --upload_dir_overwrite\
- --https_hostname=@DEFAULT_HTTPS_HOSTNAME@\
- --server_address=@DEFAULT_SERVER_ADDRESS@\
+ --https_hostname=$DEFAULT_HTTPS_HOSTNAME\
+ --server_address=$DEFAULT_SERVER_ADDRESS\
  --https_port=@DEFAULT_HTTPS_PORT@\
  $*
