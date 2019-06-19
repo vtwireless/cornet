@@ -28,16 +28,6 @@
 export DEFAULT_HTTPS_PORT=9090
 
 
-# The default HTTPS Address, like foo in https://foo.com, so we know how
-# to connect to the web server from the Internet using a web broswer.
-#
-# This is not the same as DEFAULT_SERVER_ADDRESS which is not necessarily
-# accessible from the Internet.
-#
-export DEFAULT_HTTPS_HOSTNAME=kermit.wireless.vt.edu
-
-
-
 # Version of CRTS to download and install
 #
 export CRTS_TAG=master
@@ -48,25 +38,6 @@ export CRTS_TAG=master
 ##########################################################################
 #    Things to configure, but maybe not so much.
 ##########################################################################
-
-
-# DEFAULT_SERVER_ADDRESS is the address or domain name that refers to this
-# server from computers (nodes) that access the stream programs that
-# access the USRPs. This address will be used to let the CRTS spectrum
-# feed program and the CRTS Controllers connect to this server.  You want
-# this to be the IP4 address of the computer that you are running the web
-# server on.   For example DEFAULT_SERVER_ADDRESS=192.168.40.141
-#
-# This is not necessarily an address that is accessible from the Internet.
-#
-# Since we get the address from a program there may be no need to change
-# this.
-#
-# Clearly this will fail unless ifconfig is installed.
-#
-export DEFAULT_SERVER_ADDRESS=$(
-/sbin/ifconfig eth0 | grep -e  'inet[^6]' | awk '{print $2}')
-
 
 
 # Where is the base directory of the encap system.  Where files get
