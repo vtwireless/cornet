@@ -1,5 +1,3 @@
-#!/bin/bash
-
 
 # How to find crts_contestWebServer?
 # Ans: We'll try the environment PATH that is now set.
