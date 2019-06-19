@@ -12,16 +12,17 @@ if [ "$(id -u)" != 0 ] ; then
 fi
 
 if [ ! -f config.bash ] ; then
+    # Get the configuation
     echo "config.bash was not found."
     echo
     cp default_config.bash config.bash
+    source config.bash
     chown $INST_USER:$INST_USER config.bash
     echo "Copied default_config.bash to config.bash"
+else
+    # Get the configuration 
+    source config.bash
 fi
-
-
-# Get the configuration 
-source config.bash
 
 
 stages="$(ls -1 stage*.root.bash stage*.user.bash | sort)"
