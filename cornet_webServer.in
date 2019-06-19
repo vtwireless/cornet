@@ -4,8 +4,19 @@
 # How to find crts_contestWebServer?
 # Ans: We'll try the environment PATH that is now set.
 
+set -e
+
+# Go to the directory where this script is:
+cd $(dirname "$(readlink -f "$0")")
 
 exec crts_contestWebServer\
+ --user=admin --password=adminK2\
+ --user=betty --password=bettyK1\
+ --user=joe --password=joeK1\
+ --user=fred --password=fredK1\
+ --launcher_dir ../etc/cornet/webLauncher_programs\
+ --upload_dir=$HOME/CRTS_UPLOAD\
+ --upload_dir_overwrite\
  --https_hostname=@DEFAULT_HTTPS_HOSTNAME@\
  --server_address=@DEFAULT_SERVER_ADDRESS@\
  --https_port=@DEFAULT_HTTPS_PORT@\
