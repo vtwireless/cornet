@@ -12,5 +12,5 @@ cd $(dirname "$(readlink -f "$0")")
 #[ -f config.bash ] && source default_config.bash
 
 
-rm -f *.done *.FAILED config.bash crts-*.tar.gz cornet_webServer
+rm -f *.done *.FAILED config.bash crts-*.tar.gz bin/cornet_webServer
 rm -rf crts-*
