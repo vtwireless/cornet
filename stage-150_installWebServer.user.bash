@@ -13,6 +13,6 @@ sed\
  bin/cornet_webServer.in\
  > bin/cornet_webServer
 
+chmod 755 bin/cornet_webServer
 cp bin/cornet_webServer $CORNET_PREFIX/bin
-chmod 755 $CORNET_PREFIX/bin/cornet_webServer
 cp -r etc $CORNET_PREFIX/
