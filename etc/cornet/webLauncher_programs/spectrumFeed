@@ -2,11 +2,12 @@
 
 set -ex
 
-echo "DEFAULT_SERVER_ADDRESS=$DEFAULT_SERVER_ADDRESS"
+echo "LAUNCH_ID=$LAUNCH_ID"
+echo "SERVER_ADDRESS=$SERVER_ADDRESS"
 
 cd $(dirname ${BASH_SOURCE[0]})
 
 spectrumFeed="crts_spectrumFeed"
 
 
-exec $spectrumFeed --address $DEFAULT_SERVER_ADDRESS $*
+exec $spectrumFeed --address $SERVER_ADDRESS $*
