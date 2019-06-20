@@ -1,16 +1,5 @@
 #!/bin/bash
 
-set -ex
+# We'll use the PATH to find crts_spectrumFeed
 
-echo "LAUNCH_ID=$LAUNCH_ID"
-echo "SERVER_ADDRESS=$SERVER_ADDRESS"
-echo "SPECTRUM_PORT=$SPECTRUM_PORT"
-
-
-cd $(dirname ${BASH_SOURCE[0]})
-
-# We use the PATH to find the program to run:
-spectrumFeed="crts_spectrumFeed"
-
-
-exec $spectrumFeed --address $SERVER_ADDRESS --port $SPECTRUM_PORT $*
+exec crts_spectrumFeed $*
