@@ -1,5 +1,46 @@
 #!/bin/bash
 
+set -xe
+
+# defaults
+host=
+server_address=$SERVER_ADDRESS
+spectrum_port=$SPECTRUM_PORT
+
+
+
+
+declare -a opts=()
+
+
+while [ -n "$1" ] ; do
+    case "$1" in
+        "--host")
+            shift 1
+            if [ -n "$1" ] ; then
+                host="$1"
+            fi
+            ;;
+        *)
+            opts+=("$1")
+            ;;
+    esac
+    shift 1
+done
+
+# SERVER_ADDRESS can get set in the environment
+[ -n "$SERVER_ADDRESS" ] && SERVER_ADDRESS=" --address $SERVER_ADDRESS"
+
+
+# SPECTRUM_PORT can get set in the environment
+[ -n "$SPECTRUM_PORT" ] && SPECTRUM_PORT=" --port $SPECTRUM_PORT"
+
+
+[ -n "$host" ] && host="ssh $host "
+
+echo "opts=${opts[@]}"
+
+
 # We'll use the PATH to find crts_spectrumFeed
 
-exec crts_spectrumFeed $*
+exec ${host}crts_spectrumFeed ${opts[@]}${SERVER_ADDRESS}${SPECTRUM_PORT}
